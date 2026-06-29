@@ -219,8 +219,8 @@ export class DecorationManager {
       //   So we push deleted first, then action, to render deleted above action.
 
       if (hunk.removedContent.length > 0) {
-        const markerLine = Math.max(0, hunk.newStart - 1);
-        if (markerLine < editor.document.lineCount) {
+        const markerLine = Math.min(editor.document.lineCount - 1, Math.max(0, hunk.newStart - 1));
+        if (markerLine >= 0 && markerLine < editor.document.lineCount) {
           deletedRanges.push(editor.document.lineAt(markerLine).range);
         }
       }
